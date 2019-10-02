@@ -5,12 +5,14 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,7 +37,8 @@ public class User {
 	
 	private String active;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@Fetch(FetchMode.JOIN)
 	private Set<Role> roles;
 
 }
